@@ -1,0 +1,212 @@
+Open shift is a hybrid cloud
+
+OPen shift  kubernettesby RHEL is more reliable and they provide live time support
+there are kubernettes and AWS ekd
+
+1)docker hub is a place where we can check the images of the container installed
+by someone else
+
+
+> docker search ubuntu
+
+dont download images which are not official,as they might contain ransomware etcs malwares
+ 
+in ubuntu machine apt-get update works but un centos  yum repolist works
+
+> docker run -it ubuntu
+
+instead of installing virtual machine ,we can install containers of ubuntu very quickly
+
+> docker ps to check how many containers are running
+
+2) Here we are using operating system as microservices
+3) Kubernettes is used for managing containers
+kubernettes was created by google and it donated it cncf
+pokemon go uses kubernettes, they had requirements to scale for 1 million users per seconds
+hbo is also using kubernettes
+redhat has added a lyer of openshift on top of kubernettes, 
+
+4)abhidocks23
+5)dockerhub is actually using github as background
+we can install container lets say ubuntu and we can install java using 
+apt-get update
+the main concept of openshift containers is not to install operating system
+
+there are 2 types of linux used RPM And DEBIAN
+
+UNIX was asked by one developer to shared the kernel details butthey refused
+by gtelling that they are closed source
+hr created luinux kernel, then another companies like RHEL,UBUNTU,CENTOS came and used
+these kernels to craete 2 diffrent  falvours RPM based and DEBIAN based
+
+for openshift we have 1 free open source upstream called as okd and its enterprise
+version is openshift
+
+docker ee is enterprise edition
+docker community edition : post questions and if similar problems arethere
+they will push it to company
+RH has 3 types of s/ws 
+
+1) FEDORA -upstream for red hat enterprise linux
+2)CENTOS
+3)REL 
+
+1ST AND 2ND are open source
+centos simply downloaded iso image file and simply removed all branding of RH and simply
+sold it as its own,
+REL is enterprise verion of RH
+
+OKD : openshift container daemon 
+requirements 16gb ram and quad core cpu
+
+openshift runs on kubernettes and kubernettes run on pods
+we dont use container 
+
+openshift is a cloud and docker is software
+docker is a part of openshift
+
+docker cretaes container
+
+limux kernel treats contaimner as a process
+
+pod is a sandbox with multiple containers
+
+pod may contain container all with java, its an isolated environment where each 
+project runs
+
+if we have to launch conatiner in docker we have to be root
+
+sudo is different from root
+root allows you to delete files also in ubuntu,but sudo (super doer) allows only to
+modify the / files
+
+docker took lot of time to resolve the issue of rootless conatiners
+strong linux knowledge is needed for openshift
+>kubectl get projects
+
+redhat create another layer on top of kubernettes
+
+OC
+!
+kUBERNETTES
+
+>OC get projects
+
+Open shift is kubernettes solution
+open shift is orcahestration tool
+>OC status
+
+open shift has web console also where we need not type in commands
+2 registries are there
+1)docker registry
+2) redhat registry
+
+all the images are stored in these regsitries
+
+once we install openshift we will be getting dockers and kubernettes
+
+1) for installing centos
+download the iso image copy
+go to intallation manager
+search for virtaul machin manager
+run centos
+
+for installing docker for centos
+>yum repolist
+
+1  yum repolist
+    2  REPO -repository
+    3  sudo yum install -y yum-utils   device-mapper-persistent-data   lvm2
+    4  yum-config-manager     --add-repo     https://download.docker.com/linux/centos/docker-ce.repo
+    5  yum-config-manager --enable docker-ce-nightly
+    6  his
+    7  history
+    
+    [root@localhost ~]# cat /etc/redhat-release
+CentOS Linux release 7.6.1810 (Core) 
+[root@localhost ~]# systemctl start docker
+(to start the docker)
+
+1  yum repolist
+    2  REPO -repository
+    3  sudo yum install -y yum-utils   device-mapper-persistent-data   lvm2
+    4  yum-config-manager     --add-repo     https://download.docker.com/linux/centos/docker-ce.repo
+    5  yum-config-manager --enable docker-ce-nightly
+    6  his
+    7  history
+    8  yum install docker-ce docker-ce-cli containerd.io
+    9  cat /etc/redhat-release
+   10  systemctl start docker
+   11  docker search ubuntu
+   12  docker run -it ubuntu
+   13  docker search ubuntu
+   14  docker search java
+   15  docker ps
+   16  docker container ls
+   17  docker ps -a  (to see the name of container)
+   18  history
+
+hypervisor is a tool which is used to create virtual machine
+
+   
+virtual machine is a operating system on another machine
+eaelir we use to hvae hardware and we used to create partitions and manually install
+s/ws on the hardware partitions
+
+but with virtualization we need not do that
+in containers when we are downloading ubuntu,it will download only limited features of
+ubuntu, thats why when we download ubuntu on server it will require 834 mb but if we download
+ubunut in docker it needs only 84 mb,because it has removed bloatwares ,like bloatwares
+are something we dont use but they bloat our system
+
+NOw its the responsibility of host kernel to provide resources to containers
+
+1  yum repolist
+    2  REPO -repository
+    3  sudo yum install -y yum-utils   device-mapper-persistent-data   lvm2
+    4  yum-config-manager     --add-repo     https://download.docker.com/linux/centos/docker-ce.repo
+    5  yum-config-manager --enable docker-ce-nightly
+    6  his
+    7  history
+    8  yum install docker-ce docker-ce-cli containerd.io
+    9  cat /etc/redhat-release
+   10  systemctl start docker
+   11  docker search ubuntu
+   12  docker run -it ubuntu
+   13  docker search ubuntu
+   14  docker search java
+   15  docker ps
+   16  docker container ls
+   17  docker ps -a
+   18  history
+   19  docker run -it -d ubuntu
+   20  docker attach c177eb4ad7c6e2fc333fca5aa167bcf92a965315a5e6f453996beaf6e4d8c107
+   21  history
+   https://docs.docker.com/install/linux/docker-ce/centos/
+   
+   
+  ceph storage-persistent volume?
+  cluster storage
+  other storage
+  
+  >oc get events
+  pod is like a sandbox where we can create,modify and autoscale 
+  
+  persistent volume can be used for storing database
+  if our containers gows down ,we can spin off new container and can attach 
+  new conatiner with old persistent volume
+  
+  . oc new 
+  
+  > oc logs -f -f bc/ruby-ex
+  
+  podman has its own registry QUAY
+  > oc get pods 
+  . oc describe pods
+
+
+
+
+
+
+
