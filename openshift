@@ -203,6 +203,331 @@ NOw its the responsibility of host kernel to provide resources to containers
   podman has its own registry QUAY
   > oc get pods 
   . oc describe pods
+  
+  $ sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-selinux \
+                  docker-engine-selinux \
+                  docker-engine
+                  
+           
+ INstallation prerequisites
+ Centos
+ OKD
+ 16gb ram
+ dual core cpu
+ min 40 gb free HDD space
+ 10 MBPS INTERNET CONNECTION
+ 
+ oRIGIN KUBERNETTES DEPLOYMENT
+ upstream is terminlogy used for open source products which are created by community
+ 1  ping www.google.com
+    2  yum repolist
+    3  yum remove docker                   docker-client                   docker-client-latest                   docker-common                   docker-latest                   docker-latest-logrotate                   docker-logrotate                   docker-selinux                   docker-engine-selinux                   docker-engine
+    4  ifcongig
+    5  ifconfig
+    6  yum repolist
+    7  ping www.google.com
+    8  yum repolist
+    9  docker search ubuntu
+   10  docker ps
+   11  yum remove docker-ce-cli.x86_64
+   12  yum remove containerd.io.x86_64
+   13  his
+   14  history
+   
+   in redhat machine
+   hostname
+    8  hostnamectl set-hostname abhi.openshifts.com
+    9  hostname
+    
+    1) Installing one node cluster
+    
+    its having master node and infra node on same machine
+    >create key suing sshkeygen
+    ideal thing ius to have master on one node and infra on another node
+    master communicates with other nodes using ssh
+    
+    [root@abhi ~]# ssh-copy-id abhi.openshifts.com
+    
+    this command will send the ssh key to host name mentioned
+    out of compute and master ,comput requires more cpu
+    
+    root@abhi ~]# ssh-copy-id abhi.openshifts.com
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/root/.ssh/id_rsa.pub"
+The authenticity of host 'abhi.openshifts.com (fe80::3f5d:1ea:503c:a46d%eno1)' can't be established.
+ECDSA key fingerprint is SHA256:RK/PxBuSG+MAhRhRY7m7m6l8KDK1kdefkOYsi5vh8Og.
+ECDSA key fingerprint is MD5:78:2e:64:33:ec:2d:2e:32:f5:62:14:e7:f7:20:30:07.
+Are you sure you want to continue connecting (yes/no)? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+root@abhi.openshifts.com's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'abhi.openshifts.com'"
+and check to make sure that only the key(s) you wanted were added.
+
+[root@abhi ~]# ssh abhi.openshifts.com
+Last login: Thu Apr  4 11:19:52 2019 from abhi.openshifts.com
+[root@abhi ~]# 
+
+oncentos
+
+18  ifconfig
+   19  ssh 192.168.122.73
+   20  wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+   21  rpm -ivh epel-release-latest-7.noarch.rpm
+   22  yum update
+   23  ssh key-gen
+   24  ssh keygen
+   25  ssh-keygen
+   26  hostname
+   27  hostnamectl set-hostname abhi2.openshifts.com
+   28  ssh-copy-id abhi2.openshifts.com
+   29  yum install  -y wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct
+   30  reboot
+   31  yum -y install                     https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+   32  history
+
+do yum update now
+
+1) M -N(compute)
+  (etcd)
+   |
+   n
+   (compute)
+
+etcd node contains information about other nodes
+
+in order to make your cluster high available it is better to keep more then master node ,we always keep it in odd number ,
+
+elts say if 1 master goes down ,another is there and if another goes down 3rd one is there
+
+---------HA----------------
+| |MN|-----|MN|----|MN|
+| |etcd|----|etcd|---|etcd| |
+|  1-100 compute node       |
+
+
+
+
+
+hostname
+    8  hostnamectl set-hostname abhi.openshifts.com
+    9  hostname
+192.168.1.39)
+
+https://www.tecmint.com/how-to-enable-epel-repository-for-rhel-centos-6-5/
+
+extra package for enterprise linux
+
+# wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+# rpm -ivh epel-release-latest-7.noarch.rpm
+The OKD installer requires a user that has access to all hosts. If you want to run the installer as a non-root user, first configure passwordless sudo rights each host:
+
+1>    Generate an SSH key on the host you run the installation playbook on:
+
+    # ssh-keygen
+
+    Do not use a password.
+
+	
+
+ 2>   Distribute the key to the other cluster hosts. You can use a bash loop:
+
+    # for host in master.example.com \     * 
+        node1.example.com \                            *
+        node2.example.com; \                           *
+        do ssh-copy-id -i ~/.ssh/id_rsa.pub $host; \
+        done
+
+    	- * Provide the host name for each cluster host.
+
+    Confirm that you can access each host that is listed in the loop through SSH.
+
+
+
+Installing base packages
+	
+
+If your hosts use RHEL 7.5 and you want to accept OKD’s default docker configuration (using OverlayFS storage and all default logging options), do not manually install these packages. These packages are installed when you run the prerequisites.yml playbook during installation.
+
+If your hosts use RHEL 7.4 or if they use RHEL 7.5 and you want to customize the docker configuration, install these packages.
+For RHEL 7 systems:
+
+    Install the following base packages:
+
+    # yum install  -y wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct
+
+    Update the system to the latest packages:
+
+    # yum update
+    # reboot
+
+    Install packages that are required for your installation method:
+
+        If you plan to use the containerized installer, install the following package:
+
+        # yum install atomic
+
+
+        If you plan to use the RPM-based installer:
+
+            Install Ansible. To use EPEL as a package source for Ansible:
+
+                Install the EPEL repository:
+
+                # yum -y install \
+                    https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+                Disable the EPEL repository globally so that it is not accidentally used during later steps of the installation:
+
+                # sed -i -e "s/^enabled=1/enabled=0/" /etc/yum.repos.d/epel.repo
+
+                Install the packages for Ansible:
+
+                # yum -y --enablerepo=epel install ansible pyOpenSSL
+
+            Clone the openshift/openshift-ansible repository from GitHub, which provides the required playbooks and configuration files:
+
+            # cd ~
+            # git clone https://github.com/openshift/openshift-ansible
+            # cd openshift-ansible
+            # git checkout release-3.11
+
+
+
+Installing Docker
+
+At this point, install Docker on all master and node hosts. This allows you to configure your Docker storage options before you install OKD.
+	
+
+The cluster installation process automatically modifies the /etc/sysconfig/docker file.
+For RHEL 7 systems:
+
+    Install Docker 1.13:
+
+    # yum install docker-1.13.1
+
+    Verify that version 1.13 was installed:
+
+    # rpm -V docker-1.13.1
+    # docker version
+
+Start or restart Docker.
+
+    If Docker has never run on the host, enable and start the service, then verify that it is running:
+
+    # systemctl enable docker   (its for enabling docker,in order to keep it persistently running
+    # systemctl start docker
+    # systemctl is-active docker
+    
+    in SG we have an openshift service deployed on another machine, if decide to move to eopnshift
+    we will use its clinet side fearures
+    
+    if we wish to customize authentication with open shift we can request for RFE
+     master keeps all metadata information
+     
+     # This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 1: Ungrouped hosts, specify before any group headers.
+
+## green.example.com
+## blue.example.com
+## 192.168.100.1
+## 192.168.100.10
+
+# Ex 2: A collection of hosts belonging to the 'webservers' group
+
+## [webservers]
+## alpha.example.org
+## beta.example.org
+## 192.168.1.100
+
+# If you have multiple hosts following a pattern you can specify
+# them like this:
+
+## www[001:006].example.com
+
+# Ex 3: A collection of database servers in the 'dbservers' group
+
+## [dbservers]
+##
+## db01.intranet.mydomain.net
+## db02.intranet.mydomain.net
+## 10.25.1.56
+## 10.25.1.57
+
+# Here's another example of host ranges, this time there are no
+# leading 0s:
+
+## db-[99:101]-node.example.com
+#Create an OSEv3 group that contains the masters, nodes, and etcd groups
+[OSEv3:children]
+masters
+nodes
+etcd
+
+# Set variables common for all OSEv3 hosts
+[OSEv3:vars]
+# SSH user, this user should allow ssh based auth without requiring a password
+ansible_ssh_user=root
+
+# If ansible_ssh_user is not root, ansible_become must be set to true
+#ansible_become=true
+
+openshift_deployment_type=origin
+openshift_disable_check=memory_availability,disk_availability,docker_image_availability,package_availability
+
+# uncomment the following to enable htpasswd authentication; defaults to AllowAl#lPasswordIdentityProvider
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
+
+# host group for masters
+[masters]
+abhi2.openshifts.com
+# host group for masters
+[masters]
+abhi2.openshifts.com
+
+# host group for etcd
+[etcd]
+abhi2.openshifts.com
+
+# host group for nodes, includes region info
+[nodes]
+abhi2.openshifts.com openshift_node_group_name='node-config-all-in-one'
+#node1.example.com openshift_node_group_name='node-config-compute'
+#node2.example.com openshift_node_group_name='node-config-compute'
+#infra-node1.example.com openshift_node_group_name='node-config-infra'
+#infra-node2.example.com openshift_node_group_name='node-config-infra
+
+admin commands in 
+>oc adm policy add-cluster-role-to-user jack cluster:admin
+
+command to run ansible playboo
+[root@abhi2 ansible]# ansible-playbook -i /etc/ansible/hosts playbooks/deploy_cluster.yml 
+
+the host file is in /etc/ansible/hosts
+
+
+
+
+
+ 
 
 
 
