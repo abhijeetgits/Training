@@ -577,6 +577,59 @@ vi /etc/hosts
   rushil1234@gmail.com
   subject socgen intsol
   
+  >oc get users
+  > oc adm policy add-cluster-role-to-user cluster-admin ironman
+  > oc get roles
+  > oc get -h
+  > oc get pods
+  > oc get users
+  
+  [root@devilman ~]# oc create serviceaccount jenkins2
+serviceaccount/jenkins2 created
+[root@devilman ~]# c new-project dev --display-name="Tasks - Dev"
+bash: c: command not found...
+[root@devilman ~]# oc new-project dev --display-name="Tasks - Dev"
+Error from server (AlreadyExists): project.project.openshift.io "dev" already exists
+[root@devilman ~]# oc new-project devjarvis --display-name="Tasks - Dev-By-Jarvis"
+Now using project "devjarvis" on server "https://devilman.example.com:8443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app centos/ruby-25-centos7~https://github.com/sclorg/ruby-ex.git
+
+to build a new example application in Ruby.
+[root@devilman ~]# 
+
+hi
+
+# oc create serviceaccount jenkins
+# oc new-project dev --display-name="Tasks - Dev"
+# oc new-project stage --display-name="Tasks - Stage"
+# oc new-project cicd --display-name="CI/CD"
+# oc policy add-role-to-user edit system:serviceaccount:cicd:jenkins -n dev
+# oc policy add-role-to-user edit system:serviceaccount:cicd:jenkins -n stage
+# git clone https://github.com/OpenShiftDemos/openshift-cd-demo.git
+# cd openshift-cd-demo/
+# oc create -f cicd-template.yaml( it will create an app from my template) 
+# oc new-app --template=cicd
+
+--> create account in in your gog pod and then login with the account and migrate the sample git repo.(https://github.com/OpenShiftDemos/openshift-tasks.git) into that. gog pod.
+--> after that go to jenkins pod and change the configuration :
+
+for example----------snippet--------------------------------------------
+ stage ('Build') {
+     git branch: 'eap-7', url: 'http://gogs:3000/username/<reponame>.git'
+-------------------------------------------------------------------------
+
+oc login -u=jarvis -p=q
+
+https://prometheus.io/docs/introduction/overview/
+
+neoisone  is the name of repo
+
+https://shrib.com/#intsolda
+
+
   
   
 
