@@ -523,6 +523,64 @@ command to run ansible playboo
 
 the host file is in /etc/ansible/hosts
 
+host file is in /etc/hosts
+
+vi /etc/hosts
+192.168.1.33 sandeep.example.com
+
+138  oc version
+  139  oc status
+  140  oc whoami
+  141  oc create user jarvis
+  142  oc get users
+  143  pwd
+  144  cd /etc/origin/master
+  145  pwd
+  146  htpasswd -b
+  147  htpasswd /etc/origin/master/htpasswd jarvis q
+  148  cd ..
+  149  cd /root
+  150  htpasswd /etc/origin/master/htpasswd jarvis q
+  151  htpasswd-b /etc/origin/master/htpasswd jarvis q
+  152  htpasswd -b /etc/origin/master/htpasswd jarvis q
+  153  oc get users
+  154  cat /etc/hosts
+  155  history
+  
+  jarvis is the username and q is password
+  
+  since we added hostname in locla vm but we are accessing it from host name.so we have to open
+  it fmr centos only
+  
+  https://devilman.example.com:8443/console/catalog
+  
+  container is image of an running instance
+  pods are sandbox having containers
+  every container will have different IPs
+  every pod will also have its own ips
+  sdn is software defined networking
+  
+  if you go to build => configuration => we can change the github path etc
+  
+  Applications=>pods=>edit YAML TOCHANGE PROPERTIES
+  currently our ansible playbooks have properties file with DB username and password
+  so if we decide to move to openshift our playbooks will have to be rewritten so that platform
+  deployment job will run on pods/conatiners to deply the properties instead of VMs.
+  
+  systemctl stop dbus
+  systemctl start dbus
+  systemctl restart dnsmasq.service
+  
+  NO NEED TO CHANGE THE HOST FILE FOR CLUSTER_DEPLOYMENT .yml playbook
+  +91-9024027165
+  
+  rushil1234@gmail.com
+  subject socgen intsol
+  
+  
+  
+
+
 
 
 
